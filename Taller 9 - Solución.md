@@ -211,6 +211,19 @@ En su reporte incluya el resultado y comente qué hacen los argumentos `max_inde
 
 Grafique el modelo resultante.
 
+**R/**
+
+**Parámetros:**
+
+- `max_indegree`: este parámetro controla el número máximo de padres que un nodo puede tener en la red bayesiana resultante. Un valor mayor de max_indegree permitirá estructuras más complejas con más padres por nodo, pero también puede hacer que el modelo sea más difícil de interpretar y/o computacionalmente costoso.
+- `max_iter`: este parámetro controla el número máximo de iteraciones que la búsqueda puede realizar antes de terminar. Un valor mayor de max_iter permitirá una búsqueda más exhaustiva de la estructura de la red, pero también puede hacer que el proceso sea más lento.
+
+![1681877706240](image/Taller9-Solución/1681877706240.png)
+
+![1681877728941](image/Taller9-Solución/1681877728941.png)
+
+![1681877752561](image/Taller9-Solución/1681877752561.png)
+
 ---
 
 ### 2.
@@ -223,17 +236,36 @@ print(scoring_method.score(estimated_modelh))
 
 En su reporte comente qué es este puntaje.
 
+**R/**
+
+**Puntaje:** -223501.6696113951
+
+El resultado obtenido es un valor que indica la verosimilitud (likelihood) del modelo propuesto, es decir, qué tan bien se ajustan los datos observados a la estructura de la red bayesiana.
+
+Que este sea un valor negativo puede sugerir que el modelo propuesto es poco probable o malo para representar los datos de haber generado los datos observados.
+Sin embargo, es importante tener en cuenta que los puntajes del modelo no son la única medida a considerar al evaluar una red bayesiana. Otros factores como la lógica que se desea representar y la interpretabilidad de los nodos y arcos también deben ser considerados.
+
 ---
 
 ### 3.
 
-Repita el procedimiento anterior usando el punta `BIC`, al cual puede acceder en el módulo estimators.
+Repita el procedimiento anterior usando el puntaje `BIC`, al cual puede acceder en el módulo estimators.
 
 ```py
 from pgmpy.estimators import BicScore
 ```
 
 Estime la nueva estructura, grafíquela y comente el resultado en su reporte.
+
+![1681878133324](image/Taller9-Solución/1681878133324.png)
+
+![1681878148123](image/Taller9-Solución/1681878148123.png)
+
+![1681878165236](image/Taller9-Solución/1681878165236.png)
+
+![1681878114548](image/Taller9-Solución/1681878114548.png)
+
+Este método obtiene la mayoría de los arcos entre los nodos de forma correcta, sin embargo, no obtiene la misma dirección de estos arcos, en comparación al método K2Score.
 
 ---
 
