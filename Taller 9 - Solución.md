@@ -64,6 +64,7 @@ print(df.columns)
 ```
 
 Incluya el resultado en su reporte.
+
 ![1681357467894](image/Taller9-Solución/1681357467894.png)
 ![1681357487509](image/Taller9-Solución/1681357487509.png)
 ![1681357498500](image/Taller9-Solución/1681357498500.png)
