@@ -91,6 +91,20 @@ En su reporte incluya el resultado y explique qué quiere decir el segundo argum
 
 Grafique el modelo resultante.
 
+**R/**
+
+**Parámetros:**
+
+- `max_cond_vars`: el máximo número de variables condicionales permitidas con las cuales hacer el test estadístico.
+
+Fuente: [PGMPY - Structure Estimator](https://pgmpy.org/structure_estimator/pc.html)
+
+![1681876227818](image/Taller9-Solución/1681876227818.png)
+
+![1681876248118](image/Taller9-Solución/1681876248118.png)
+
+![1681876137808](image/Taller9-Solución/1681876137808.png)
+
 ---
 
 ### 3.
@@ -109,6 +123,58 @@ for i in estimated_model.nodes():
 ```
 
 Incluya y comente el resultado en su reporte.
+
+|   asia   |       asia(no)       |      asia(yes)      |
+| :------: | :------------------: | :-----------------: |
+| tub(no)  |  0.9895918511564049  | 0.9448568398727466  |
+| tub(yes) | 0.010408148843595103 | 0.05514316012725345 |
+
+Se observa que aunque segun el modelo asia afecta a tub la distribución no cambia de forma considerable
+
+|    lung     | lung(no) | lung(no) | lung(yes) | lung(yes) |
+| :---------: | :------: | :------: | :-------: | :-------: |
+|     tub     | tub(no)  | tub(yes) |  tub(no)  | tub(yes)  |
+| either(no)  |   1.0    |   0.0    |    0.0    |    0.0    |
+| either(yes) |   0.0    |   1.0    |    1.0    |    1.0    |
+
+Se comporta de la forma en que se espera ya que es una variable que toma en cuenta si alguna de las dos (lung o tub) toman el valor.
+
+| **smoke**     | **smoke(no)**        | **smoke(yes)**      |
+| ------------- | -------------------- | ------------------- |
+| **lung(no)**  | 0.9905701842010628   | 0.8993512994033557  |
+| **lung(yes)** | 0.009429815798937148 | 0.10064870059664438 |
+
+Podemos ver que aunque fumar afecta el riesgo de cancér, no lo hace en gran magnitud.
+
+| **smoke**      | **smoke(no)**       | **smoke(yes)**      |
+| -------------- | ------------------- | ------------------- |
+| **bronc(no)**  | 0.7000039956846605  | 0.40153365634885674 |
+| **bronc(yes)** | 0.29999600431533946 | 0.5984663436511433  |
+
+Podemos ver que fumar afecta el riesgo de bronquitis de gran manera, aumentando su probabilidad en un 30%.
+
+| bronc     | bronc(no)           | ... | bronc(yes)          |
+| --------- | ------------------- | --- | ------------------- |
+| either    | either(no)          | ... | either(yes)         |
+| dysp(no)  | 0.8995302463809798  | ... | 0.09483960948396095 |
+| dysp(yes) | 0.10046975361902023 | ... | 0.905160390516039   |
+
+| either    | either(no)           | either(yes)         |
+| --------- | -------------------- | ------------------- |
+| xray(no)  | 0.9506402644500787   | 0.01962287291123716 |
+| xray(yes) | 0.049359735549921374 | 0.9803771270887628  |
+
+Esta es una de las tablas de probabilidad condicional que más cambia, ya que la probabilidad de rayos x cambia considerablemente dado que cuenta o no con alguna de las enfermedades (lung o tub).
+
+| asia(no)  | 0.99057 |
+| --------- | ------- |
+| asia(yes) | 0.00943 |
+
+La mayoría de las personas de los datos no son asiáticas.
+
+| smoke(no)  | 0.50054 |
+| ---------- | ------- |
+| smoke(yes) | 0.49946 |
 
 ---
 
