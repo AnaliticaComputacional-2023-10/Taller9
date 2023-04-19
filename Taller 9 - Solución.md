@@ -322,6 +322,20 @@ print(df_raw_growth.head())
 
 En su reporte describa los datos crudos y los datos obtenidos con la transformación.
 
+- Raw Data
+
+![1681878616855](image/Taller9-Solución/1681878616855.png)
+
+Los datos crudos muestran distintos datos demográficos y estadísticos de Italia, a lo largo de los años yendo desde 1960 hasta 2019.
+
+- Transformados
+
+![1681878722554](image/Taller9-Solución/1681878722554.png)
+
+Por medio de la función se calcula el crecimiento anual de cada indicador como una medida relativa, lo que permite comparar el cambio en diferentes indicadores a lo largo del tiempo.
+
+El nuevo conjunto de datos contiene los mismos indicadores que el conjunto de datos crudos, pero con un nuevo indicador de crecimiento anual agregado a cada fila. Esto generó algunos nulos en algunas filas y la transformación de ciertas variables, pero se realiza para que sea más fácil de analizar y visualizar, ya que proporciona una medida común del cambio a lo largo del tiempo para cada indicador.
+
 ---
 
 ### 2.
@@ -391,21 +405,47 @@ print(df.head(10))
 
 En su reporte comente en qué consiste esta transformación.
 
+**R/**
+
+La transformación consiste en dividir los valores de una serie temporal en tres niveles (A, B, C).
+
+Primero, se ordenan los valores de la serie temporal y se dividen en tres partes iguales, es decir, se dividen en tres "tiers".
+
+Luego, se calculan los límites de cada nivel basados en los valores mínimo y máximo de cada "tier".
+
+Por último, se etiquetan los valores de la serie original con la letra correspondiente al nivel al que pertenecen según su valor.
+
+Además, se crea un nuevo dataframe donde los años ya no son las columnas sino las filas y los indicadores se ubican en las columnas, lo que permite una mejor interpretabilidad y facilidad para trabajar con los datos.
+
 ---
 
 ### 4.
 
 Estime la estructura del modelo usando el método por restricciones. En su reporte incluya el modelo y comente los resultados.
 
+![1681879187108](image/Taller9-Solución/1681879187108.png)
+
+![1681879206466](image/Taller9-Solución/1681879206466.png)
+
+Podemos ver que con este método solo se obtiene una red conformada por 4 nodos de 10 posibles y donde las interacciones son bastante nulas. Por lo que se podría estar dejando de lado información importante.
+
 ---
 
-### 4.
+### 5.
 
 Estime la estructura del modelo usando el método por puntaje. En su reporte incluya el modelo y comente los resultados.
 
+![1681879283931](image/Taller9-Solución/1681879283931.png)
+
+![1681879296067](image/Taller9-Solución/1681879296067.png)
+
+![1681879327972](image/Taller9-Solución/1681879327972.png)
+
+Podemos ver que este modelo usa todos los nodos posibles (10/10) lo que nos permite asegurarnos que no se deja información de lado (al menos a priori), además, a diferencia del anterior se cuenta con bastantes interacciones. Por lo que al comparar los dos métodos puede que para este dataset sea mejor estimar la estructura por el método de puntaje que por el de restricciones, esto no implica que la estimación por restricciones sea erronea o no deba usarse jamás, simplemente en estos datos no obtiene el mejor ajuste.
+
 ---
 
-### 4.
+### 6.
 
 Lorenzo propuso el siguiente modelo
 
@@ -427,3 +467,23 @@ model = BayesianModel([
 ```
 
 En su reporte compare este modelo con los que obtuvo en los numerales anteriores.
+
+![1681879559337](image/Taller9-Solución/1681879559337.png)
+
+Para mayor facilidad de comparación ubicaremos todos los modelos uno al lado del otro.
+
+- Restricciones
+
+![1681879206466](image/Taller9-Solución/1681879206466.png)
+
+- K2Score
+
+![1681879327972](image/Taller9-Solución/1681879327972.png)
+
+- Lorenzo
+
+![1681879559337](image/Taller9-Solución/1681879559337.png)
+
+Dado que tenemos 2 modelos de 3 que usan todos los nodos o columnas del dataset, y solo 1 que usa 4 nodos y solo dos arcos, podemos decir que el método por restricciones resulta erróneo para representar los datos.
+
+Por otro lado, la estructura obtenida con el K2Score es en algunos aspectos distinta a la obtenida por Lorenzo, no incluyendo algunos arcos o modificando la dirección de los mismos, por lo que se recomienda trabajar con ambos modelos y a partir de la intersección de ambos hallar el mejor modelo que combina la prueba estadística del K2Score y el conocimiento en el campo de Lorenzo. Es decir, uno no se debe quedar con solo uno y decir este es mejor que el otro, sino aceptar que cada uno tiene sus ventajas y desventajas que al unir ambos modelos no llega a ser perfecto, sin embargo, es un mejor resultado a trabajar separadamente.
